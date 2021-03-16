@@ -8,7 +8,7 @@
  2=> virtualenv "you can call it anything ex. myenv"
 
  3=> on Windows => myenv\scripts\activate 
-
+____________________________________________________________________________________
  #RUN SERVER 
 
  1=> cd backend
