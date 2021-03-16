@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -5,7 +7,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Category(MPTTModel):
-
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(
         verbose_name=_("Category Name"),
         help_text=_("Required and unique"),
@@ -33,6 +35,7 @@ class Category(MPTTModel):
 
 
 class ProductType(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     name = models.CharField(verbose_name=_("Product Name"), help_text=_(
         "Required"), max_length=255, unique=True)
@@ -47,6 +50,7 @@ class ProductType(models.Model):
 
 
 class ProductSpecification(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
     name = models.CharField(verbose_name=_(
@@ -61,6 +65,7 @@ class ProductSpecification(models.Model):
 
 
 class Product(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     product_type = models.ForeignKey(ProductType, on_delete=models.RESTRICT)
     category = models.ForeignKey(Category, on_delete=models.RESTRICT)
@@ -117,6 +122,7 @@ class Product(models.Model):
 
 
 class ProductSpecificationValue(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     specification = models.ForeignKey(
@@ -136,6 +142,7 @@ class ProductSpecificationValue(models.Model):
 
 
 class ProductImage(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name="product_image")
